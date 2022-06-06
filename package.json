@@ -1,0 +1,25 @@
+{
+  "name": "thefirstock",
+  "version": "1.0.0",
+  "description": "Node js package for using firstock apis",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/technologythefirstock/thefirstock_nodejs.git"
+  },
+  "keywords": [
+    "firstock"
+  ],
+  "author": "firstock",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/technologythefirstock/thefirstock_nodejs/issues"
+  },
+  "homepage": "https://github.com/technologythefirstock/thefirstock_nodejs#readme",
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}
