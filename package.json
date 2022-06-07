@@ -1,6 +1,6 @@
 {
   "name": "thefirstock",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Node js package for using firstock apis",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "firstock"
   ],
   "author": "firstock",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/technologythefirstock/thefirstock_nodejs/issues"
   },
