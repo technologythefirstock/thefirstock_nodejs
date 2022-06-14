@@ -1,13 +1,14 @@
 'use strict';
 const axios = require('axios');
 const Validations = require('../Validations/Validations')
+const WebSocket = require("ws");
 const Commonfunctions = require('../shared/Commonfunctions')
-const API_LINK = require("../shared/Constant")
+const CONSTANT = require("../shared/Constant")
 
 
 
 let axiosInterceptor = axios.create({
-    baseURL: API_LINK,
+    baseURL: CONSTANT.API_LINK,
 });
 
 const AFirstock = require("./AFirstock");
@@ -667,6 +668,68 @@ class Firstock extends AFirstock {
                 })
             }
         })
+    }
+    initializeWebSocket() {
+        const ws = new WebSocket(CONSTANT.WSS_LINK)
+        return ws;
+    }
+    getWebSocketDetails(callBack) {
+        Commonfunctions.readData((err, data) => {
+            if (err) {
+                callBack(err, null)
+            }
+            const params = {
+                t: "c",
+                uid: data.userId,
+                actid: data.userId,
+                susertoken: data.token,
+                source: "API"
+            }
+            callBack(null, JSON.stringify(params))
+
+        })
+    }
+    sendWebSocketDetails({
+        t,
+        e,
+        k = "",
+        tk = "",
+        pp = "",
+        ts = "",
+        ti = "",
+        ls = "",
+        lp = "",
+        pc = "",
+        v = "",
+        o = "",
+        h = "",
+        l = "",
+        c = "",
+        ap = ""
+    }) {
+        const messageData = {
+            t,
+            k,
+            e,
+            tk,
+            pp,
+            ts,
+            ti,
+            ls,
+            lp,
+            pc,
+            v,
+            o,
+            h,
+            l,
+            c,
+            ap
+        }
+        return JSON.stringify(messageData)
+    }
+    receiveWebSocketDetails(data) {
+        const decodedJsonObject = Buffer.from(data, 'base64').toString('ascii');
+        return JSON.parse(decodedJsonObject)
     }
 }
 
