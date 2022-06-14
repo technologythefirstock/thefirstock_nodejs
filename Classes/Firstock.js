@@ -691,39 +691,55 @@ class Firstock extends AFirstock {
     }
     sendWebSocketDetails({
         t,
-        e,
-        k = "",
-        tk = "",
-        pp = "",
-        ts = "",
-        ti = "",
-        ls = "",
-        lp = "",
-        pc = "",
-        v = "",
-        o = "",
-        h = "",
-        l = "",
-        c = "",
-        ap = ""
+        k,
+        actid = ""
     }) {
         const messageData = {
             t,
             k,
-            e,
-            tk,
-            pp,
-            ts,
-            ti,
-            ls,
-            lp,
-            pc,
-            v,
-            o,
-            h,
-            l,
-            c,
-            ap
+            actid
+        }
+        return JSON.stringify(messageData)
+    }
+    subscribeTouchline(k) {
+        const messageData = {
+            t: "t",
+            k,
+        }
+        return JSON.stringify(messageData)
+    }
+    unsubscribeTouchline(k) {
+        const messageData = {
+            t: "u",
+            k,
+        }
+        return JSON.stringify(messageData)
+    }
+    subscribeDepth(k) {
+        const messageData = {
+            t: "d",
+            k,
+        }
+        return JSON.stringify(messageData)
+    }
+    unsubscribeDepth(k) {
+        const messageData = {
+            t: "ud",
+            k,
+        }
+        return JSON.stringify(messageData)
+    }
+    subscribeOrderUpdate(actid) {
+        const messageData = {
+            t: "o",
+            actid,
+        }
+        return JSON.stringify(messageData)
+    }
+    unsubscribeOrderUpdate() {
+        const messageData = {
+            t: "uo",
+
         }
         return JSON.stringify(messageData)
     }
