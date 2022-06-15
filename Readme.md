@@ -391,6 +391,195 @@ firstock.timePriceSeries({
     console.log("Result: ", result)
 })
 ```
+## WebSockets
+
+## General Guidelines
+The WebSocket API uses WebSocket protocol to establish a single long standing TCP connection after an HTTP handshake to receive streaming quotes. The WebSocket API is the most efficient way to receive quotes for instruments across all exchanges during live market hours.
+
+In addition to market data, alerts, and order updates are also streamed. To connect to the Firstock WebSocket API, you will need a WebSocket client library in your choice of programming language.
+
+Connect to 
+```
+wss://norenapi.thefirstock.com/NorenWSTP/
+```
+
+Keep It in Mind
+
+(1) As soon as connection is done, a connection request should be sent with User id and login session id.  
+
+(2) All input and output messages will be in json format.  
+
+## Subscribe Touchline
+
+Websocket TouchLine subscription API will provide multiple instruments available actions and possible values at once.
+```javascript 
+const Firstock = require('thefirstock');
+const firstock = new Firstock();
+
+
+const ws = firstock.initializeWebSocket();
+
+ws.on('open', function open() {
+    firstock.getWebSocketDetails((err, result) => {
+        if (!err) {
+            ws.send(result)
+        }
+    })
+});
+
+ws.on("error", function error(error) {
+    console.log(`WebSocket error: ${error}`)
+})
+
+ws.on('message', function message(data) {
+    const result = firstock.receiveWebSocketDetails(data)
+    console.log('Result: ', result)
+    ws.send(firstock.subscribeTouchline("NSE|26000#NSE|26009#NSE|26017"))
+}); 
+```
+
+## Unsubscribe Touchline
+
+```javascript 
+const Firstock = require('thefirstock');
+const firstock = new Firstock();
+
+
+const ws = firstock.initializeWebSocket();
+
+ws.on('open', function open() {
+    firstock.getWebSocketDetails((err, result) => {
+        if (!err) {
+            ws.send(result)
+        }
+    })
+});
+
+ws.on("error", function error(error) {
+    console.log(`WebSocket error: ${error}`)
+})
+
+ws.on('message', function message(data) {
+    const result = firstock.receiveWebSocketDetails(data)
+    console.log('Result: ', result)
+    ws.send(firstock.unsubscribeTouchline("NSE|26000#NSE|26009#NSE|26017"))
+}); 
+```
+
+## Subscribe Order Update
+
+Websocket Order Status API will function in providing order status updates through websocket server connection and provide Order responses similar to the one received in Postback/Webhook.
+```javascript 
+const Firstock = require('thefirstock');
+const firstock = new Firstock();
+
+
+const ws = firstock.initializeWebSocket();
+
+ws.on('open', function open() {
+    firstock.getWebSocketDetails((err, result) => {
+        if (!err) {
+            ws.send(result)
+        }
+    })
+});
+
+ws.on("error", function error(error) {
+    console.log(`WebSocket error: ${error}`)
+})
+
+ws.on('message', function message(data) {
+    const result = firstock.receiveWebSocketDetails(data)
+    console.log('Result: ', result)
+    ws.send(firstock.subscribeOrderUpdate("TV0001"))
+});  
+```
+
+## Unsubscribe Order Update
+
+```javascript 
+const Firstock = require('thefirstock');
+const firstock = new Firstock();
+
+
+const ws = firstock.initializeWebSocket();
+
+ws.on('open', function open() {
+    firstock.getWebSocketDetails((err, result) => {
+        if (!err) {
+            ws.send(result)
+        }
+    })
+});
+
+ws.on("error", function error(error) {
+    console.log(`WebSocket error: ${error}`)
+})
+
+ws.on('message', function message(data) {
+    const result = firstock.receiveWebSocketDetails(data)
+    console.log('Result: ', result)
+    ws.send(firstock.unsubscribeOrderUpdate())
+});  
+```
+
+## Subscribe Depth
+
+Websocket Subscribe Depth API will provide multiple instruments market information at once.(5 Depth,high, low, close, etc..)
+```javascript 
+const Firstock = require('thefirstock');
+const firstock = new Firstock();
+
+
+const ws = firstock.initializeWebSocket();
+
+ws.on('open', function open() {
+    firstock.getWebSocketDetails((err, result) => {
+        if (!err) {
+            ws.send(result)
+        }
+    })
+});
+
+ws.on("error", function error(error) {
+    console.log(`WebSocket error: ${error}`)
+})
+
+ws.on('message', function message(data) {
+    const result = firstock.receiveWebSocketDetails(data)
+    console.log('Result: ', result)
+    ws.send(firstock.subscribeDepth("NSE|26000#NSE|26009#NSE|26017"))
+});  
+```
+
+## Unsubscribe Depth
+
+```javascript 
+const Firstock = require('thefirstock');
+const firstock = new Firstock();
+
+
+const ws = firstock.initializeWebSocket();
+
+ws.on('open', function open() {
+    firstock.getWebSocketDetails((err, result) => {
+        if (!err) {
+            ws.send(result)
+        }
+    })
+});
+
+ws.on("error", function error(error) {
+    console.log(`WebSocket error: ${error}`)
+})
+
+ws.on('message', function message(data) {
+    const result = firstock.receiveWebSocketDetails(data)
+    console.log('Result: ', result)
+    ws.send(firstock.unsubscribeDepth("NSE|26000#NSE|26009#NSE|26017"))
+});  
+```
+
 
 
 
