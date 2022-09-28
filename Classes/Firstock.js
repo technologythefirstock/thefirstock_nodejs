@@ -404,7 +404,7 @@ class Firstock extends AFirstock {
             else {
                 const userId = data.userId || this.userId
                 const jKey = data.token || this.token;
-                axiosInterceptor.post(`holding`, {
+                axiosInterceptor.post(`holdings`, {
                     userId,
                     jKey,
                     actid: userId,
@@ -641,6 +641,7 @@ class Firstock extends AFirstock {
         token,
         endtime,
         starttime,
+        intrv
     }, callBack) {
         Commonfunctions.readData((err, data) => {
             if (err) {
@@ -656,6 +657,7 @@ class Firstock extends AFirstock {
                     token,
                     endtime,
                     starttime,
+                    intrv
 
                 }).then((response) => {
                     const { data } = response
@@ -708,6 +710,12 @@ class Firstock extends AFirstock {
         }
         return JSON.stringify(messageData)
     }
+    subscribeTouchlineAcknowledgement() {
+        const messageData = {
+            t: "tk",
+        }
+        return JSON.stringify(messageData)
+    }
     unsubscribeTouchline(k) {
         const messageData = {
             t: "u",
@@ -722,6 +730,12 @@ class Firstock extends AFirstock {
         }
         return JSON.stringify(messageData)
     }
+    subscribeDepthAcknowledgement() {
+        const messageData = {
+            t: "dk",
+        }
+        return JSON.stringify(messageData)
+    }
     unsubscribeDepth(k) {
         const messageData = {
             t: "ud",
@@ -733,6 +747,12 @@ class Firstock extends AFirstock {
         const messageData = {
             t: "o",
             actid,
+        }
+        return JSON.stringify(messageData)
+    }
+    subscribeOrderAcknowledgement() {
+        const messageData = {
+            t: "ok",
         }
         return JSON.stringify(messageData)
     }
