@@ -34,7 +34,7 @@ firstock.login({
     "password": "",
     "DOBnPAN": "",
     "vendorCode": "",
-    "appkey": ""
+    "apiKey": ""
 },(err, result)=>{
     console.log("Error, ",err)
     console.log("Result: ",result)
