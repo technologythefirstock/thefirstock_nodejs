@@ -491,7 +491,7 @@ ws.on("error", function error(error) {
 ws.on('message', function message(data) {
     const result = firstock.receiveWebSocketDetails(data)
     console.log('Result: ', result)
-    ws.send(firstock.subscribeOrderUpdate("#actid" //Replace with actid))
+    ws.send(firstock.subscribeOrderUpdate("#actid")) //Replace with actid
 });  
 ```
 
