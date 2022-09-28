@@ -385,7 +385,8 @@ firstock.timePriceSeries({
     exchange: "",
     token: "",
     endTime: "",
-    startTime: ""
+    startTime: "",
+    intrv:""
 }, (err, result) => {
     console.log("Error, ", err)
     console.log("Result: ", result)
