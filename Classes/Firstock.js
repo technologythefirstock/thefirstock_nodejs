@@ -21,16 +21,16 @@ class Firstock extends AFirstock {
         this.userId = "";
     }
 
-    login({ userId, password, DOBnPAN, vendorCode, appkey }, callBack) {
+    login({ userId, password, DOBnPAN, vendorCode, apiKey }, callBack) {
         Validations.validateLogin({
-            userId, password, DOBnPAN, vendorCode, appkey
+            userId, password, DOBnPAN, vendorCode, apiKey
         })
         axiosInterceptor.post(`login`, {
             userId,
             password,
             DOBnPAN,
             vendorCode,
-            appkey
+            apiKey
         }).then((response) => {
             const { data } = response
             this.token = data.susertoken
@@ -44,7 +44,7 @@ class Firstock extends AFirstock {
                     callBack(null, data)
                 }
             }
-            Commonfunctions.saveData({ token: data.susertoken, userId: data.actid }, "config.json", finished)
+            Commonfunctions.saveData({ token: data.data.susertoken, userId: data.data.actid }, "config.json", finished)
 
         }).catch((error) => {
             callBack(error.message, null)
