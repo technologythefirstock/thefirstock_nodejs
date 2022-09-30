@@ -42,7 +42,21 @@ const checkifUserLoggedIn = ({ userId, token }) => {
 
 }
 
+const validateBasketMarginObject = (data) =>{
+    if(data["exchange"] && data["tradingSymbol"] && data["quantity"] && data["transactionType"])
+    {
+        return true
+    }
+    return false
+}
+
+const validateBasketMargin = (data) =>{
+    return data.every(a=>validateBasketMarginObject(a));
+}
+
 module.exports = {
     saveData,
-    readData
+    readData,
+    validateBasketMarginObject,
+    validateBasketMargin
 }
