@@ -266,6 +266,31 @@ firstock.limits((err, result)=>{
 })
 ```
 
+## Basket Margin
+
+```javascript 
+const Firstock = require('thefirstock');
+
+const firstock = new Firstock();
+
+firstock.basketMargin(
+  {
+    data: [
+      {
+        exchange: "",
+        tradingSymbol: "",
+        quantity: "",
+        transactionType: "",
+      },
+    ],
+  },
+  (err, result) => {
+    console.log("Error, ", err);
+    console.log("Result: ", result);
+  }
+);
+```
+
 ## Get Quotes
 
 The market quotes APIs enable you to retrieve market data snapshots of various instruments. These are snapshots gathered from the exchanges at the time of the request. For realtime streaming market quotes, use the WebSocket API.
@@ -391,6 +416,28 @@ firstock.timePriceSeries({
     console.log("Error, ", err)
     console.log("Result: ", result)
 })
+```
+
+## Option Greek
+```javascript 
+const Firstock = require('thefirstock');
+
+const firstock = new Firstock();
+
+firstock.optionGreek(
+  {
+    expiryDate: "",
+    strikePrice: "",
+    spotPrice: "",
+    initRate: "",
+    volatility: "",
+    optionType: "",
+  },
+  (err, result) => {
+    console.log("Error, ", err);
+    console.log("Result: ", result);
+  }
+);
 ```
 ## WebSockets
 
