@@ -18,11 +18,11 @@ class Firstock extends AFirstock {
     this.userId = "";
   }
 
-  login({ userId, password, DOBnPAN, vendorCode, apiKey }, callBack) {
+  login({ userId, password, TOTP, vendorCode, apiKey }, callBack) {
     Validations.validateLogin({
       userId,
       password,
-      DOBnPAN,
+      TOTP,
       vendorCode,
       apiKey,
     });
@@ -30,7 +30,7 @@ class Firstock extends AFirstock {
       .post(`login`, {
         userId,
         password,
-        DOBnPAN,
+        TOTP,
         vendorCode,
         apiKey,
       })
@@ -229,7 +229,7 @@ class Firstock extends AFirstock {
       }
     });
   }
-  cancelOrder({ norenordno }, callBack) {
+  cancelOrder({ orderNumber }, callBack) {
     Commonfunctions.readData((err, data) => {
       if (err) {
         callBack(err, null);
@@ -240,7 +240,7 @@ class Firstock extends AFirstock {
           .post(`cancelOrder`, {
             userId,
             jKey,
-            norenordno,
+            orderNumber,
           })
           .then((response) => {
             const { data } = response;
@@ -255,7 +255,7 @@ class Firstock extends AFirstock {
   }
   modifyOrder(
     {
-      norenordno,
+      orderNumber,
       price,
       quantity,
       triggerPrice,
@@ -278,7 +278,7 @@ class Firstock extends AFirstock {
             quantity,
             price,
             triggerPrice,
-            norenordno,
+            orderNumber,
             exchange,
             tradingSymbol,
             priceType,
@@ -294,7 +294,7 @@ class Firstock extends AFirstock {
       }
     });
   }
-  singleOrderHistory({ norenordno }, callBack) {
+  singleOrderHistory({ orderNumber }, callBack) {
     Commonfunctions.readData((err, data) => {
       if (err) {
         callBack(err, null);
@@ -305,7 +305,7 @@ class Firstock extends AFirstock {
           .post(`singleOrderHistory`, {
             userId,
             jKey,
-            norenordno,
+            orderNumber,
           })
           .then((response) => {
             const { data } = response;
@@ -583,18 +583,9 @@ class Firstock extends AFirstock {
     });
   }
   spanCalculator(
-    {
-      exchange,
-      instname,
-      symbolName,
-      expd,
-      optt,
-      strikePrice,
-      netQuantity,
-      buyQuantity,
-      sellQuantity,
-      product,
-    },
+    
+      listData
+    ,
     callBack
   ) {
     Commonfunctions.readData((err, data) => {
@@ -607,17 +598,7 @@ class Firstock extends AFirstock {
           .post(`spanCalculators`, {
             userId,
             jKey,
-            actid: userId,
-            exchange,
-            instname,
-            symbolName,
-            expd,
-            optt,
-            strikePrice,
-            netQuantity,
-            buyQuantity,
-            sellQuantity,
-            product,
+            data:listData
           })
           .then((response) => {
             const { data } = response;
