@@ -582,12 +582,7 @@ class Firstock extends AFirstock {
       }
     });
   }
-  spanCalculator(
-    
-      listData
-    ,
-    callBack
-  ) {
+  spanCalculator(listData, callBack) {
     Commonfunctions.readData((err, data) => {
       if (err) {
         callBack(err, null);
@@ -598,7 +593,7 @@ class Firstock extends AFirstock {
           .post(`spanCalculators`, {
             userId,
             jKey,
-            data:listData
+            data: listData,
           })
           .then((response) => {
             const { data } = response;
@@ -639,31 +634,46 @@ class Firstock extends AFirstock {
       }
     });
   }
-  basketMargin({ data }, callBack) {
+  basketMargin(
+    {
+      exchange,
+      tradingSymbol,
+      quantity,
+      transactionType,
+      price,
+      product,
+      priceType,
+      data,
+    },
+    callBack
+  ) {
     Commonfunctions.readData((err, dat) => {
       if (err) {
         callBack(err, null);
       } else {
-        if (data.length && Commonfunctions.validateBasketMargin(data)) {
-          const userId = dat.userId || this.userId;
-          const jKey = dat.token || this.token;
-          axiosInterceptor
-            .post(`basketMargin`, {
-              userId,
-              jKey,
-              data,
-            })
-            .then((response) => {
-              const { data } = response;
+        const userId = dat.userId || this.userId;
+        const jKey = dat.token || this.token;
+        axiosInterceptor
+          .post(`basketMargin`, {
+            userId,
+            jKey,
+            exchange,
+            tradingSymbol,
+            quantity,
+            transactionType,
+            price,
+            product,
+            priceType,
+            data,
+          })
+          .then((response) => {
+            const { data } = response;
 
-              callBack(null, data);
-            })
-            .catch((error) => {
-              callBack(error.message, null);
-            });
-        } else {
-          callBack("Please send the appropriate object in data field", null);
-        }
+            callBack(null, data);
+          })
+          .catch((error) => {
+            callBack(error.message, null);
+          });
       }
     });
   }
