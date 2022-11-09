@@ -708,7 +708,269 @@ class Firstock extends AFirstock {
       }
     });
   }
+  multiPlaceOrder({ data }, callBack) {
+    Commonfunctions.readData((err, datatemp) => {
+      if (err) {
+        callBack(err, null);
+      } else {
+        const userId = datatemp.userId || this.userId;
+        const jKey = datatemp.token || this.token;
+        axiosInterceptor
+          .post(`strategies/multiPlaceOrders`, {
+            userId,
+            jKey,
+            data,
+          })
+          .then((response) => {
+            const { data } = response;
 
+            callBack(null, data);
+          })
+          .catch((error) => {
+            callBack(error.message, null);
+          });
+      }
+    });
+  }
+  bearPutSpread(
+    {
+      symbol,
+      putBuyStrikePrice,
+      putSellStrikePrice,
+      expiry,
+      product,
+      quantity,
+      remarks,
+    },
+    callBack
+  ) {
+    Commonfunctions.readData((err, data) => {
+      if (err) {
+        callBack(err, null);
+      } else {
+        const userId = data.userId || this.userId;
+        const jKey = data.token || this.token;
+        axiosInterceptor
+          .post(`strategies/bearPutSpread`, {
+            symbol,
+            putBuyStrikePrice,
+            putSellStrikePrice,
+            expiry,
+            product,
+            quantity,
+            remarks,
+            jKey,
+            actId: userId,
+          })
+          .then((response) => {
+            const { data } = response;
+
+            callBack(null, data);
+          })
+          .catch((error) => {
+            callBack(error.message, null);
+          });
+      }
+    });
+  }
+  bullCallSpread(
+    {
+      symbol,
+      callBuyStrikePrice,
+      callSellStrikePrice,
+      expiry,
+      product,
+      quantity,
+      remarks,
+    },
+    callBack
+  ) {
+    Commonfunctions.readData((err, data) => {
+      if (err) {
+        callBack(err, null);
+      } else {
+        const userId = data.userId || this.userId;
+        const jKey = data.token || this.token;
+        axiosInterceptor
+          .post(`strategies/bullCallSpread`, {
+            symbol,
+            callBuyStrikePrice,
+            callSellStrikePrice,
+            expiry,
+            product,
+            quantity,
+            remarks,
+            jKey,
+            actId: userId,
+          })
+          .then((response) => {
+            const { data } = response;
+
+            callBack(null, data);
+          })
+          .catch((error) => {
+            callBack(error.message, null);
+          });
+      }
+    });
+  }
+  longStrangle(
+    {
+      symbol,
+      callStrikePrice,
+      putStrikePrice,
+      expiry,
+      product,
+      quantity,
+      remarks,
+    },
+    callBack
+  ) {
+    Commonfunctions.readData((err, data) => {
+      if (err) {
+        callBack(err, null);
+      } else {
+        const userId = data.userId || this.userId;
+        const jKey = data.token || this.token;
+        axiosInterceptor
+          .post(`strategies/longStrangle`, {
+            symbol,
+            callStrikePrice,
+            putStrikePrice,
+            expiry,
+            product,
+            quantity,
+            remarks,
+            jKey,
+            actId: userId,
+          })
+          .then((response) => {
+            const { data } = response;
+            callBack(null, data);
+          })
+          .catch((error) => {
+            callBack(error.message, null);
+          });
+      }
+    });
+  }
+  longStraddle(
+    { symbol, strikePrice, expiry, product, quantity, remarks },
+    callBack
+  ) {
+    Commonfunctions.readData((err, data) => {
+      if (err) {
+        callBack(err, null);
+      } else {
+        const userId = data.userId || this.userId;
+        const jKey = data.token || this.token;
+        axiosInterceptor
+          .post(`strategies/longStraddle`, {
+            symbol,
+            strikePrice,
+            expiry,
+            product,
+            quantity,
+            remarks,
+            jKey,
+            actId: userId,
+          })
+          .then((response) => {
+            const { data } = response;
+            callBack(null, data);
+          })
+          .catch((error) => {
+            callBack(error.message, null);
+          });
+      }
+    });
+  }
+  shortStraddle(
+    {
+      symbol,
+      strikePrice,
+      expiry,
+      product,
+      quantity,
+      remarks,
+      hedge,
+      hedgeValue,
+    },
+    callBack
+  ) {
+    Commonfunctions.readData((err, data) => {
+      if (err) {
+        callBack(err, null);
+      } else {
+        const userId = data.userId || this.userId;
+        const jKey = data.token || this.token;
+        axiosInterceptor
+          .post(`strategies/shortStraddle`, {
+            symbol,
+            strikePrice,
+            expiry,
+            product,
+            quantity,
+            remarks,
+            jKey,
+            actId: userId,
+            hedge,
+            hedgeValue,
+          })
+          .then((response) => {
+            const { data } = response;
+            callBack(null, data);
+          })
+          .catch((error) => {
+            callBack(error.message, null);
+          });
+      }
+    });
+  }
+  shortStrangle(
+    {
+      symbol,
+      callStrikePrice,
+      putStrikePrice,
+      expiry,
+      product,
+      quantity,
+      remarks,
+      hedge,
+      hedgeValue,
+    },
+    callBack
+  ) {
+    Commonfunctions.readData((err, data) => {
+      if (err) {
+        callBack(err, null);
+      } else {
+        const userId = data.userId || this.userId;
+        const jKey = data.token || this.token;
+        axiosInterceptor
+          .post(`strategies/longStrangle`, {
+            symbol,
+            callStrikePrice,
+            putStrikePrice,
+            expiry,
+            product,
+            quantity,
+            remarks,
+            jKey,
+            actId: userId,
+            hedge,
+            hedgeValue,
+          })
+          .then((response) => {
+            const { data } = response;
+            callBack(null, data);
+          })
+          .catch((error) => {
+            callBack(error.message, null);
+          });
+      }
+    });
+  }
   initializeWebSocket() {
     const ws = new WebSocket(CONSTANT.WSS_LINK);
     return ws;
