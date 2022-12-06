@@ -1002,7 +1002,7 @@ class Firstock extends AFirstock {
   }
   subscribeFeed(k) {
     const messageData = {
-      t: "t",
+      t: "tf",
       k,
     };
     return JSON.stringify(messageData);
@@ -1023,14 +1023,15 @@ class Firstock extends AFirstock {
   }
   subscribeDepth(k) {
     const messageData = {
-      t: "d",
+      t: "df",
       k,
     };
     return JSON.stringify(messageData);
   }
-  subscribeDepthAcknowledgement() {
+  subscribeDepthAcknowledgement(k) {
     const messageData = {
-      t: "dk",
+      t: "d",
+      k,
     };
     return JSON.stringify(messageData);
   }
@@ -1051,6 +1052,7 @@ class Firstock extends AFirstock {
   subscribeOrderAcknowledgement() {
     const messageData = {
       t: "ok",
+    
     };
     return JSON.stringify(messageData);
   }
