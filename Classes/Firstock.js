@@ -36,7 +36,7 @@ class Firstock extends AFirstock {
       })
       .then((response) => {
         const { data } = response;
-        this.token = data.susertoken;
+        this.token = data.data.susertoken;
         this.userId = data.actid;
         const finished = (error) => {
           if (error) {
@@ -971,6 +971,8 @@ class Firstock extends AFirstock {
       }
     });
   }
+
+  //Websockets Start
   initializeWebSocket() {
     const ws = new WebSocket(CONSTANT.WSS_LINK);
     return ws;
@@ -998,20 +1000,21 @@ class Firstock extends AFirstock {
     };
     return JSON.stringify(messageData);
   }
-  subscribeTouchline(k) {
+  subscribeFeed(k) {
     const messageData = {
       t: "t",
       k,
     };
     return JSON.stringify(messageData);
   }
-  subscribeTouchlineAcknowledgement() {
+  subscribeFeedAcknowledgement(k) {
     const messageData = {
-      t: "tk",
+      t: "t",
+      k
     };
     return JSON.stringify(messageData);
   }
-  unsubscribeTouchline(k) {
+  unsubscribeFeed(k) {
     const messageData = {
       t: "u",
       k,
@@ -1061,6 +1064,8 @@ class Firstock extends AFirstock {
     const decodedJsonObject = Buffer.from(data, "base64").toString("ascii");
     return JSON.parse(decodedJsonObject);
   }
+
+    //Websockets End
 }
 
 module.exports = Firstock;
